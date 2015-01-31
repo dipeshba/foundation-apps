@@ -132,18 +132,16 @@ gulp.task('css', ['sass'], function() {
 
 // Compile stylesheets with Ruby Sass
 gulp.task('sass', function() {
-  return sass('docs/assets/scss/', {
-      loadPath: ['scss'],
-      style: 'nested',
-      bundleExec: true
-    })
-    .on('error', function(err) {
-      console.log(err.message);
-    })
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions', 'ie 10']
-    }))
-    .pipe(gulp.dest('./build/assets/css/'));
+  return sass('client/assets/scss', 
+  { 
+    loadPath: sassPaths,
+    style: 'nested',
+    bundleExec: true 
+  })
+  .on('error', function (err) {
+    console.error('Error!', err.message);
+  })
+  .pipe(gulp.dest('./build/assets/css'));
 });
 
 // Compile stylesheets with node-sass
